@@ -2,23 +2,50 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 */12 * * *"
-
-  workflow_dispatch:
+    - cron: "0 */6 * * *"   # Runs every 6 hours (4x more fresh than before)
+  workflow_dispatch:          # Manual trigger from GitHub Actions UI
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - uses: Platane/snk@v3
+      # ─── Light theme snake (default green on #ebedf0) ───────────────────────
+      - name: Generate light snake
+        uses: Platane/snk@v3
         with:
           github_user_name: prajwalsh1930
           outputs: |
             dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#00F5FF&color_dots=#161B22,#0E4429,#006D32,#26A641,#39D353
 
-      - uses: crazy-max/ghaction-github-pages@v3
+      # ─── Dark beast — neon green snake, deep dark grid, max drama ───────────
+      - name: Generate dark beast snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: prajwalsh1930
+          outputs: |
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#39D353&color_dots=#0D1117,#0E4429,#006D32,#26A641,#39D353
+
+      # ─── Ultra beast — cyan electric snake, pitch black void background ─────
+      - name: Generate ultra beast snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: prajwalsh1930
+          outputs: |
+            dist/github-contribution-grid-snake-beast.svg?palette=github-dark&color_snake=#00F5FF&color_dots=#000000,#003333,#005555,#007777,#00FFCC
+
+      # ─── Lava beast — red/orange inferno snake (bonus flavor) ───────────────
+      - name: Generate lava snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: prajwalsh1930
+          outputs: |
+            dist/github-contribution-grid-snake-lava.svg?palette=github-dark&color_snake=#FF4500&color_dots=#0D0000,#3D0A00,#7A1A00,#C23B00,#FF4500
+
+      # ─── Push all variants to `output` branch ───────────────────────────────
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output
           build_dir: dist
