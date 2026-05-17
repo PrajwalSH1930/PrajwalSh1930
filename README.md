@@ -46,7 +46,12 @@ Passionate about building scalable systems using Java, Spring Boot, React, SQL, 
 # 📈 Contribution Graph
 
 <p align="center">
-  <img src="https://github.com/prajwalsh1930/prajwalsh1930/blob/output/github-contribution-grid-snake.svg" alt="snake animation"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)"
+      srcset="https://raw.githubusercontent.com/prajwalsh1930/prajwalsh1930/output/github-contribution-grid-snake-beast.svg" />
+    <img alt="contribution beast"
+      src="https://raw.githubusercontent.com/prajwalsh1930/prajwalsh1930/output/github-contribution-grid-snake.svg" />
+  </picture>
 </p>
 
 ---
